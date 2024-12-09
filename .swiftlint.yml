@@ -8,6 +8,8 @@ disabled_rules:
  - function_body_length
  - nesting
  - inclusive_language
+ - identifier_name
+ - force_cast
 opt_in_rules:
  - empty_count
  - empty_string
@@ -24,3 +26,7 @@ opt_in_rules:
 identifier_name:
   min_length:
     warning: 0
+identifier_name:
+  allowed_symbols: "_"
+type_name:
+  allowed_symbols: "_"
