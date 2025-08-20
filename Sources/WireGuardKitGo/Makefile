@@ -19,8 +19,14 @@ CFLAGS_PREFIX := $(if $(DEPLOYMENT_TARGET_CLANG_FLAG_NAME),-$(DEPLOYMENT_TARGET_
 IS_CATALYST ?= $(shell if [[ "$(EFFECTIVE_PLATFORM_NAME)" == *"maccatalyst"* ]]; then echo 1; fi)
 GOARCH_arm64 := arm64
 GOARCH_x86_64 := amd64
-GOOS_macosx := $(if $(IS_CATALYST),ios,darwin)
-GOOS_macosx := darwin
+IS_CATALYST ?= $(shell if [[ "$(EFFECTIVE_PLATFORM_NAME)" == *"maccatalyst"* ]]; then echo 1; fi)
+ifeq ($(IS_CATALYST),1)
+  GOOS_macosx := ios
+  GOARCH_arm64 := arm64
+  ARCHS := arm64
+else
+  GOOS_macosx := darwin
+endif
 GOOS_iphoneos := ios
 GOOS_iphonesimulator := ios
 
